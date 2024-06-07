@@ -4,47 +4,41 @@ import MoviesList from "./components/moviesList/moviesList";
 import Filter from "./components/filter/filter";
 import {
   FilteredListType,
-  FilterValues,
   HandleFilterType,
   MovieCardType,
 } from "./types/moviesList";
 import {
+  filterFuncs,
   SelectGenreOptions,
   SelectRateOptions,
 } from "./constants/filterOptions";
-import { filteredBaseGenre, filteredBaseRate } from "./utils/filterList";
 import data from "./data.json";
 import classes from "./App.module.scss";
 
 function App() {
-  const [moviesList, setMoviesList] = useState<MovieCardType[]>(data);
+  const [moviesList, setMoviesList] = useState<MovieCardType[]>([]);
   const [searchParams] = useSearchParams();
 
   const handleFilteredList: HandleFilterType = (value, type) => {
     if (value) {
-      const obj: FilteredListType = {
-        [FilterValues.Rate]: () => filteredBaseRate(value, moviesList),
-        [FilterValues.Genre]: () => filteredBaseGenre(value, data),
-      };
-      return obj[type as keyof FilteredListType]();
+      return filterFuncs[type as keyof FilteredListType](value, moviesList);
     } else {
       return data;
     }
   };
 
-  const handleInitialData = () => {
+  useEffect(() => {
     let dataOfList: MovieCardType[] = data;
-
     if (searchParams.size) {
       searchParams.forEach((value, key) => {
-        dataOfList = handleFilteredList(value, key);
-        console.log(dataOfList);
+        dataOfList = filterFuncs[key as keyof typeof filterFuncs](
+          value,
+          dataOfList
+        );
       });
     }
     setMoviesList(dataOfList);
-  };
-
-  useEffect(() => handleInitialData(), []);
+  }, []);
 
   return (
     <div className={classes.App}>
