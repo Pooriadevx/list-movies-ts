@@ -1,0 +1,71 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  font-size: 0;
+  $parent: &;
+  &:hover {
+    img {
+      opacity: 0.2;
+    }
+    #{$parent}_overlay {
+      opacity: 1;
+    }
+  }
+  &_overlay {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    p {
+      padding: 0px;
+      margin: 0px;
+    }
+    &_badge {
+      border-radius: 8px;
+      background-color: #3c3631;
+      padding: 3px 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+  img {
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+  &_info {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    min-height: inherit;
+    font-size: 15px;
+
+    p:first-of-type {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 100px;
+      overflow: hidden;
+    }
+    &_badge {
+      padding: 3px 8px;
+      border-radius: 8px;
+      background-color: #6a6a6a;
+    }
+  }
+}
