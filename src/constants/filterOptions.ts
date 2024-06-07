@@ -1,6 +1,6 @@
-import { filteredBaseGenre, filteredBaseRate } from './../utils/filterList';
+import { filteredBaseGenre, filteredBaseRate } from "./../utils/filterList";
 import {
-  filteredBaseType,
+  FilterFuncsType,
   FilterPlaceholders,
   FilterValues,
   OptionType,
@@ -126,7 +126,7 @@ export const CustomSelectStyles: StylesConfig = {
   }),
 };
 
-export const filterFuncs: Record<FilterValues, filteredBaseType> = {
+export const filterFuncs: FilterFuncsType = {
   [FilterValues.Genre]: filteredBaseGenre,
   [FilterValues.Rate]: filteredBaseRate,
 };

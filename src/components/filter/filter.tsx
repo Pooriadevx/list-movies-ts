@@ -14,10 +14,7 @@ import {
 } from "../../types/moviesList";
 import { CustomSelectStyles } from "../../constants/filterOptions";
 
-const Filter: React.FC<FilterPropsType> = ({
-  handleFilter,
-  multiSelectOptions,
-}) => {
+const Filter: React.FC<FilterPropsType> = ({ multiSelectOptions }) => {
   const [optionSelected, setOptionSelected] =
     useState<SingleValue<OptionType>>(null);
 
@@ -26,7 +23,6 @@ const Filter: React.FC<FilterPropsType> = ({
   const handleChange: HandleChangeType = (value, type) => {
     setOptionSelected(value);
     if (value?.value) {
-      handleFilter(value.value, type);
       setSearchParams((searchParams) => {
         searchParams.set(type, value.value);
         return searchParams;

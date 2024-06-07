@@ -108,12 +108,7 @@ export type filteredBaseType = (
   moviesList: MovieCardType[]
 ) => MovieCardType[];
 
-export type FilteredListType = Record<FilterValues, () => MovieCardType[]>;
-
-export type HandleFilterType = (
-  data: OptionType["value"] | undefined,
-  action: string
-) => MovieCardType[];
+export type FilterFuncsType = Record<FilterValues, filteredBaseType>;
 
 export type HandleChangeType = (
   data: SingleValue<OptionType>,
@@ -127,7 +122,7 @@ export type OptionType = {
 
 export type MovieCardPropsType = {
   data: Pick<
-  MovieCardType,
+    MovieCardType,
     | "avg_rate_label"
     | "movie_title"
     | "categories"
@@ -138,7 +133,6 @@ export type MovieCardPropsType = {
 };
 
 export type FilterPropsType = {
-  handleFilter: (value: string, type: FilterValues) => void;
   multiSelectOptions: Props;
 };
 
